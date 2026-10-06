@@ -1,0 +1,70 @@
+<!-- Slider wrapper -->
+<div class="relative">
+  <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4">
+    <!-- Card - repeat -->
+    <div class="min-w- sm:min-w- snap-start">
+      <div class="bg-white border border-gray-200 rounded-2xl p-2 shadow-sm">
+        <div class="relative h- rounded-xl overflow-hidden group">
+          <button type="button" class="block w-full h-full focus:outline-none">
+            <img class="w-full h-full object-cover rounded-xl group-hover:scale-[1.03] transition-transform duration-500"
+                 src="/your-image.jpg" alt="Card Image">
+          </button>
+          <!-- Overlay Labels -->
+          <div class="absolute bottom-0 inset-x-0 m-2">
+            <div class="flex justify-between items-center gap-3">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full text-xs font-medium text-gray-900 shadow-sm">
+                <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                Live
+              </span>
+              <span class="inline-flex px-3 py-1.5 bg-white rounded-full text-xs font-medium text-gray-900 shadow-sm truncate max-w-">
+                G4 Doorbell 2 High
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl p-2 shadow-sm">
+  <div class="relative h- rounded-xl overflow-hidden group">
+    <img class="w-full h-full object-cover rounded-xl group-hover:scale-[1.03] transition duration-500" src="/your-image.jpg" alt="">
+    <div class="absolute bottom-0 inset-x-0 m-2 flex justify-between gap-3">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-800 text-gray-900 dark:text-neutral-100 rounded-full text-xs font-medium shadow">
+        <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Live
+      </span>
+      <span class="inline-flex px-3 py-1.5 bg-white dark:bg-neutral-800 text-gray-900 dark:text-neutral-100 rounded-full text-xs font-medium shadow truncate">
+        G4 Doorbell 2 High
+      </span>
+    </div>
+  </div>
+</div>
+
+export default function ImageCardSlider({ items }) {
+  return (
+    <div className="relative">
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none">
+        {items.map((item, i) => (
+          <div key={i} className="min-w- sm:min-w- snap-start">
+            <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl p-2">
+              <div className="relative h- rounded-xl overflow-hidden group">
+                <button className="block w-full h-full focus:outline-none">
+                  <img src={item.src} alt={item.title} className="w-full h-full object-cover rounded-xl group-hover:scale-[1.03] transition-transform duration-500" />
+                </button>
+                <div className="absolute bottom-0 inset-x-0 m-2 flex justify-between items-center gap-3">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-full text-xs font-medium shadow">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full" /> Live
+                  </span>
+                  <span className="px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-full text-xs font-medium shadow truncate">
+                    {item.title}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
