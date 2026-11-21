@@ -33,29 +33,29 @@ function LeaderboardCard() {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between border-b border-dashed border-gray-200 pb-3 dark:border-neutral-700">
-        <h2 className="text-sm font-medium text-gray-800 dark:text-neutral-200">Top authors</h2>
+        <h2 className="text-sm font-medium text-gray-800 dark:text-neutral-200">Property overview</h2>
         <button type="button" className="text-[13px] text-gray-500 underline-offset-2 hover:underline dark:text-neutral-400">
-          Next: Niki Kray
+          View property
         </button>
       </div>
 
       <div className="mt-4 flex items-center gap-3">
-        <img className="size-14 rounded-full object-cover" src="/photo-1492562080023-ab3db95bfbce.png" alt="Brian Williams" />
-        <p className="text-lg font-medium text-gray-800 dark:text-neutral-200">Brian Williams</p>
+        <img className="size-14 rounded-full object-cover" src="/photo-1492562080023-ab3db95bfbce.png" alt="Property manager" />
+        <p className="text-lg font-medium text-gray-800 dark:text-neutral-200">Your property</p>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-4">
-        <Stat label="Published posts:" value="48"><Icon><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v5h5" /></Icon></Stat>
-        <Stat label="Avg. post views:" value="285"><Icon><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></Icon></Stat>
-        <Stat label="Total comments:" value="18"><Icon><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></Icon></Stat>
-        <Stat label="Posts referred:" value="62"><Icon><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" /><path d="m21 3-9 9M15 3h6v6" /></Icon></Stat>
+        <Stat label="Available rooms:" value="48"><Icon><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v5h5" /></Icon></Stat>
+        <Stat label="Bookings this month:" value="285"><Icon><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></Icon></Stat>
+        <Stat label="Guest reviews:" value="18"><Icon><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></Icon></Stat>
+        <Stat label="Occupancy rate:" value="62%"><Icon><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" /><path d="m21 3-9 9M15 3h6v6" /></Icon></Stat>
       </div>
 
       <div className="mt-6 border-t border-gray-200 pt-5 dark:border-neutral-700">
-        <span className="text-[13px] text-gray-500 dark:text-neutral-400">Total views</span>
+        <span className="text-[13px] text-gray-500 dark:text-neutral-400">Total bookings</span>
         <p className="mt-1 text-xl text-gray-800 dark:text-neutral-200">1,420</p>
         <div className="mt-4 h-16">
-          <svg viewBox="0 0 220 80" className="h-full w-full" preserveAspectRatio="none" aria-label="Total views trend">
+          <svg viewBox="0 0 220 80" className="h-full w-full" preserveAspectRatio="none" aria-label="Total bookings trend">
             <path d="M0 55 25 56 50 48 75 51 100 38 125 43 150 30 175 35 220 20V80H0Z" className="fill-gray-200 dark:fill-neutral-800" />
             <path d="M0 55 25 56 50 48 75 51 100 38 125 43 150 30 175 35 220 20" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-700 dark:text-neutral-300" />
           </svg>
@@ -65,14 +65,14 @@ function LeaderboardCard() {
       <div className="mt-6 border-t border-gray-200 pt-5 dark:border-neutral-700">
         <div className="flex items-center gap-4">
           <div className="flex size-12 items-center justify-center rounded-full border-4 border-gray-700 text-sm font-medium text-gray-800 dark:border-neutral-300 dark:text-neutral-200">76%</div>
-          <div><span className="block text-[13px] text-gray-500 dark:text-neutral-400">Content quality score</span><span className="text-sm text-green-600">+3.4%</span></div>
+          <div><span className="block text-[13px] text-gray-500 dark:text-neutral-400">Guest rating</span><span className="text-sm text-green-600">+3.4%</span></div>
         </div>
         <ul className="mt-5 flex flex-col gap-4 text-sm">
-          <li className="flex justify-between"><span>Title/subject length</span><strong>Good</strong></li>
-          <li className="flex justify-between"><span>Body word count</span><strong>Good</strong></li>
-          <li className="flex justify-between"><span>Tags/keywords</span><strong>Good</strong></li>
-          <li className="flex justify-between"><span>Broken links</span><strong className="text-orange-500">Poor</strong></li>
-          <li className="flex justify-between"><span>Spelling &amp; grammar</span><strong>Good</strong></li>
+          <li className="flex justify-between"><span>Cleanliness</span><strong>4.8 / 5</strong></li>
+          <li className="flex justify-between"><span>Location</span><strong>4.7 / 5</strong></li>
+          <li className="flex justify-between"><span>Staff &amp; service</span><strong>4.9 / 5</strong></li>
+          <li className="flex justify-between"><span>Value for money</span><strong className="text-orange-500">4.2 / 5</strong></li>
+          <li className="flex justify-between"><span>Facilities &amp; comfort</span><strong>4.6 / 5</strong></li>
         </ul>
       </div>
     </div>
@@ -132,7 +132,7 @@ function ImageSlider() {
           <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
         </button>
         <button type="button" onClick={() => goTo(current + 1)} aria-label="Next image" className="absolute right-4 top-1/2 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-lg transition hover:scale-105 hover:bg-white/90">
-          <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m9 18 6-6 6" /></svg>
+          <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
         </button>
       </div>
 
