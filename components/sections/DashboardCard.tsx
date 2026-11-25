@@ -40,7 +40,7 @@ function LeaderboardCard() {
       </div>
 
       <div className="mt-4 flex items-center gap-3">
-        <img className="size-14 rounded-full object-cover" src="/photo-1492562080023-ab3db95bfbce.png" alt="Property manager" />
+        <img className="size-14 rounded-full object-cover" src="/photo-1492562080023-ab3db95bfbce.png" alt="Property manager" loading="lazy" decoding="async" />
         <p className="text-lg font-medium text-gray-800 dark:text-neutral-200">Your property</p>
       </div>
 
@@ -117,7 +117,7 @@ function ImageSlider() {
             <div key={slide.id} className="h-full shrink-0 p-2" style={{ width: `${100 / slides.length}%` }}>
               <div className="h-full overflow-hidden rounded-2xl border border-white/30 bg-white/10 p-2 backdrop-blur-xl">
                 <div className="relative h-full w-full overflow-hidden rounded-xl">
-                  <img src={slide.src} alt={slide.title} className="size-full object-cover object-center" />
+                  <img src={slide.src} alt={slide.title} className="size-full object-cover object-center" loading={slide.id === 1 ? 'eager' : 'lazy'} decoding="async" />
                   <div className="absolute inset-x-0 bottom-0 m-3 flex items-center justify-between gap-2">
                     <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-black/50 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-xl"><span className="size-1.5 animate-pulse rounded-full bg-red-500" />Live</span>
                     <span className="max-w-[65%] truncate rounded-full bg-white/70 px-3 py-1.5 text-xs text-black backdrop-blur-xl sm:text-sm">{slide.title}</span>
@@ -145,13 +145,59 @@ function ImageSlider() {
   );
 }
 
+function BookingBar() {
+  const [guests, setGuests] = useState(2);
+
+  return (
+    <form
+      className="mt-8 rounded-[28px] bg-blue-600 p-3 shadow-lg shadow-blue-900/15 sm:p-4"
+      onSubmit={(event) => event.preventDefault()}
+      aria-label="Find a stay"
+    >
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.55fr)_minmax(270px,1fr)_minmax(190px,.8fr)_170px] lg:gap-4">
+        <label className="flex min-h-16 items-center gap-3 rounded-2xl bg-white px-4 text-blue-700 shadow-sm transition focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-blue-600">
+          <svg className="size-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 5 5" /></svg>
+          <span className="sr-only">Destination</span>
+          <input className="min-w-0 flex-1 bg-transparent text-base font-medium outline-none placeholder:text-blue-700/60" type="search" name="destination" placeholder="Where are you going?" defaultValue="Saint-Louis, Senegal" />
+        </label>
+
+        <div className="grid min-h-16 grid-cols-2 overflow-hidden rounded-2xl bg-white shadow-sm">
+          <label className="flex min-w-0 items-center gap-2 border-r border-blue-100 px-3 text-blue-700 sm:px-4">
+            <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M7 3v4m10-4v4M3 10h18" /></svg>
+            <span className="sr-only">Check in</span>
+            <input className="min-w-0 bg-transparent text-sm font-medium outline-none" type="date" name="checkIn" aria-label="Check in" />
+          </label>
+          <label className="flex min-w-0 items-center gap-2 px-3 text-blue-700 sm:px-4">
+            <span className="sr-only">Check out</span>
+            <input className="min-w-0 bg-transparent text-sm font-medium outline-none" type="date" name="checkOut" aria-label="Check out" />
+          </label>
+        </div>
+
+        <label className="flex min-h-16 items-center gap-3 rounded-2xl bg-white px-4 text-blue-700 shadow-sm">
+          <svg className="size-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="9" cy="7" r="3" /><circle cx="17" cy="9" r="2" /><path d="M3 21v-2a6 6 0 0 1 12 0v2M15 21v-1a4 4 0 0 1 4-4" /></svg>
+          <span className="sr-only">Guests</span>
+          <select value={guests} onChange={(event) => setGuests(Number(event.target.value))} className="min-w-0 flex-1 appearance-none bg-transparent text-base font-medium outline-none" name="guests">
+            {[1, 2, 3, 4, 5, 6].map((count) => <option key={count} value={count}>{count} {count === 1 ? 'guest' : 'guests'}</option>)}
+          </select>
+          <svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+        </label>
+
+        <button type="submit" className="min-h-16 rounded-2xl bg-white px-6 text-base font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 active:scale-[.98]">Search</button>
+      </div>
+    </form>
+  );
+}
+
 export default function DashboardCard() {
   return (
     <main className="min-h-screen w-full bg-white px-4 py-6 text-gray-800 dark:bg-neutral-950 dark:text-neutral-200 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-[1400px]">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-start lg:gap-10 xl:grid-cols-[380px_minmax(0,1fr)]">
           <aside><LeaderboardCard /></aside>
-          <section><ImageSlider /></section>
+          <section>
+            <ImageSlider />
+            <BookingBar />
+          </section>
         </div>
       </div>
     </main>

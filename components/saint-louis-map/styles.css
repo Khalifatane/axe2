@@ -1,0 +1,618 @@
+
+
+.map-app {
+  --page: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-hover: #f0f3ee;
+  --border: rgba(40, 54, 41, 0.12);
+  --border-strong: rgba(40, 54, 41, 0.2);
+  --text: #202a21;
+  --muted: #687368;
+  --dim: #8c958a;
+  --accent: #75936e;
+  --accent-strong: #547652;
+  --coral: #cb674f;
+  padding: 0 36px 22px;
+  background:
+    radial-gradient(ellipse at 74% -12%, rgba(84, 112, 82, 0.12), transparent 40%),
+    var(--page);
+  color: var(--text);
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  color-scheme: light;
+  box-sizing: border-box;
+}
+
+.map-app * {
+  box-sizing: border-box;
+}
+
+.map-app button,
+.map-app input {
+  font: inherit;
+}
+
+.map-app button {
+  color: inherit;
+}
+
+.map-app button:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.map-app .page-content {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.map-app .section-label {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.map-app .workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 292px;
+  align-items: start;
+  gap: 16px;
+}
+
+.map-app .map-card,
+.map-app .detail-card,
+.map-app .district-list-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--surface);
+}
+
+.map-app .map-card {
+  align-self: start;
+  aspect-ratio: 639 / 616;
+}
+
+.map-app .map-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #edf1eb;
+  isolation: isolate;
+}
+
+.map-app .map-base,
+.map-app .district-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-app .map-base {
+  overflow: hidden;
+  opacity: 1;
+  background:
+    radial-gradient(ellipse at 32% 42%, rgba(139, 165, 121, 0.22), transparent 38%),
+    radial-gradient(ellipse at 82% 68%, rgba(187, 171, 126, 0.2), transparent 42%),
+    linear-gradient(135deg, #f3f5ed 0%, #e8eee8 44%, #f2f1e7 70%, #e7eee9 100%);
+}
+
+.map-app .map-base::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 14% 33%, rgba(104, 119, 95, 0.12) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 64% 78%, rgba(128, 120, 94, 0.11) 0 1px, transparent 2px),
+    repeating-linear-gradient(28deg, transparent 0 25px, rgba(98, 115, 91, 0.04) 26px, transparent 27px 43px),
+    repeating-linear-gradient(118deg, transparent 0 46px, rgba(98, 115, 91, 0.035) 47px, transparent 48px 67px);
+  content: "";
+}
+
+.map-app .landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-app .road {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.map-app .road-one {
+  stroke: rgba(91, 105, 83, 0.16);
+  stroke-width: 2.3;
+}
+
+.map-app .road-two {
+  stroke: rgba(91, 105, 83, 0.1);
+  stroke-width: 1.5;
+}
+
+.map-app .map-caption {
+  position: absolute;
+  z-index: 1;
+  color: rgba(65, 81, 65, 0.6);
+  font-size: clamp(8px, 0.9vw, 11px);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.map-app .map-caption-south {
+  left: 4%;
+  bottom: 8%;
+  color: rgba(105, 95, 69, 0.62);
+}
+
+.map-app .map-coordinates {
+  position: absolute;
+  bottom: 17px;
+  left: 17px;
+  color: rgba(54, 67, 55, 0.68);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.map-app .district-map {
+  z-index: 2;
+  overflow: visible;
+}
+
+.map-app .district-outline {
+  cursor: pointer;
+  outline: none;
+  transition: fill 150ms ease, stroke 150ms ease, stroke-width 150ms ease;
+}
+
+.map-app .district-outline:focus-visible {
+  stroke: #f1d39c;
+  stroke-width: 4;
+}
+
+.map-app .map-chip {
+  position: absolute;
+  z-index: 3;
+  top: 15px;
+  left: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid rgba(40, 54, 41, 0.14);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #253126;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.map-app .map-chip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.map-app .north-marker {
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  right: 16px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  color: rgba(45, 59, 46, 0.78);
+  font-size: 8px;
+  pointer-events: none;
+}
+
+.map-app .north-marker svg {
+  width: 11px;
+  height: 17px;
+  fill: rgba(45, 59, 46, 0.72);
+}
+
+.map-app .map-scale {
+  position: absolute;
+  z-index: 2;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(45, 59, 46, 0.75);
+  font-size: 8px;
+  pointer-events: none;
+}
+
+.map-app .map-scale i {
+  width: 24px;
+  height: 4px;
+  border-right: 1px solid rgba(45, 59, 46, 0.75);
+  border-bottom: 1px solid rgba(45, 59, 46, 0.75);
+  border-left: 1px solid rgba(45, 59, 46, 0.75);
+}
+
+.map-app .side-panel {
+  display: grid;
+  gap: 12px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.map-app .detail-card {
+  min-height: 190px;
+  padding: 17px;
+}
+
+.map-app .section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+
+.map-app .section-label > span {
+  color: var(--accent-strong);
+  font-size: 14px;
+}
+
+.map-app .empty-detail {
+  display: flex;
+  min-height: 130px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.map-app .empty-compass {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  margin-bottom: 9px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.map-app .empty-compass svg {
+  width: 21px;
+  stroke: var(--accent-strong);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.map-app .empty-detail h2,
+.map-app .selected-detail h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.map-app .empty-detail p,
+.map-app .selected-detail p {
+  max-width: 205px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.map-app .district-profile-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.map-app .district-profile-counts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.map-app .district-profile-counts strong {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.map-app .district-profile-counts span,
+.map-app .district-profile-empty {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.map-app .district-profile-list {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-app .district-profile-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.map-app .district-profile-list a:hover {
+  color: var(--accent);
+}
+
+.map-app .district-profile-list a span:last-child {
+  color: var(--muted);
+}
+
+.map-app .district-profile-empty {
+  margin-top: 9px;
+}
+
+.map-app .selected-detail {
+  position: relative;
+  margin-top: 27px;
+  padding-left: 13px;
+  border-left: 2px solid var(--coral);
+}
+
+.map-app .selected-index {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--coral);
+  font-size: 14px;
+}
+
+.map-app .selected-detail button {
+  margin-top: 13px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.map-app .selected-detail button:hover {
+  color: var(--text);
+}
+
+.map-app .selected-detail button span {
+  margin-left: 4px;
+  font-size: 13px;
+}
+
+.map-app .district-list-card {
+  padding: 17px 0 8px;
+}
+
+.map-app .list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 13px;
+}
+
+.map-app .list-count {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.map-app .district-list {
+  max-height: 343px;
+  overflow-y: auto;
+  padding: 0 7px;
+  scrollbar-color: var(--dim) transparent;
+  scrollbar-width: thin;
+}
+
+.map-app .district-row {
+  display: flex;
+  width: 100%;
+  min-height: 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.map-app .district-row:hover,
+.map-app .district-row.selected {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.map-app .district-row.selected .row-index {
+  color: var(--coral);
+}
+
+.map-app .row-index {
+  width: 19px;
+  color: var(--dim);
+  font-size: 14px;
+}
+
+.map-app .row-arrow {
+  margin-left: auto;
+  color: var(--dim);
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.map-app .district-row:hover .row-arrow,
+.map-app .district-row.selected .row-arrow {
+  opacity: 1;
+}
+
+.map-app .toast {
+  position: fixed;
+  z-index: 10;
+  bottom: 22px;
+  left: 50%;
+  padding: 10px 16px;
+  transform: translateX(-50%);
+  border: 1px solid var(--border-strong);
+  border-radius: 30px;
+  background: var(--surface-raised);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
+  color: var(--text);
+  font-size: 11px;
+  animation: saint-louis-toast-in 160ms ease-out;
+}
+
+@keyframes saint-louis-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 1050px) {
+  .map-app {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .map-app .workspace {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 12px;
+  }
+
+}
+
+@media (min-width: 761px) {
+  .map-app .page-content {
+    container-type: inline-size;
+  }
+
+  .map-app .side-panel {
+    height: calc((100cqw - 308px) * 616 / 639 - 2px);
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .map-app .detail-card {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .map-app .district-list-card {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .map-app .district-list {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1050px) {
+  .map-app .side-panel {
+    height: calc((100cqw - 272px) * 616 / 639 - 2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .map-app {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .map-app .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .map-app .side-panel {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .map-app .detail-card {
+    min-height: 170px;
+    padding: 14px;
+  }
+
+  .map-app .district-list-card {
+    padding-top: 14px;
+  }
+
+  .map-app .district-list {
+    max-height: 260px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .map-app {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+
+  .map-app .side-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .map-app .detail-card {
+    min-height: 156px;
+  }
+
+  .map-app .empty-detail {
+    min-height: 105px;
+  }
+
+  .map-app .district-list {
+    max-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-app *,
+.map-app *::before,
+.map-app *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

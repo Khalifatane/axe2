@@ -18,7 +18,7 @@ export default function SlidingTestimonials() {
       {[...row, ...row].map((testimonial, index) => (
         <article key={`${testimonial.name}-${index}`} className="h-[200px] w-[400px] shrink-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
           <div className="flex items-center gap-4">
-            <img className="size-11 rounded-full object-cover" src={testimonial.avatar} alt="" />
+            <img className="size-11 rounded-full object-cover" src={testimonial.avatar} alt="" loading="lazy" decoding="async" />
             <p className="text-lg font-semibold text-gray-800 dark:text-neutral-200">{testimonial.name}</p>
           </div>
           <p className="mt-6 text-base leading-8 text-gray-500 dark:text-neutral-400">{testimonial.text}</p>
